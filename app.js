@@ -3,6 +3,7 @@ import path from "node:path";
 import session from "express-session";
 import passport from "passport";
 import "dotenv/config";
+import router from "./routes/router.js";
 
 const app = express();
 
@@ -16,14 +17,10 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 app.use(passport.session());
-ap.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/");
-
-app.get("/sign-up");
-app.post("/sign-up");
-
-app.post("/log-in");
+app.use(router);
 
 app.listen(3000, () => console.log("Server listening on port 3000"));
