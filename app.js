@@ -25,3 +25,5 @@ app.get("/sign-up");
 app.post("/sign-up");
 
 app.post("/log-in");
+
+app.listen(3000, () => console.log("Server listening on port 3000"));
