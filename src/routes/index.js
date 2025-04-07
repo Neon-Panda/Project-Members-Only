@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as render from "../controllers/render.js";
 import * as auth from "../controllers/auth.js";
 import passport from "passport";
-import "../controllers/local-strategy.js";
+import "../config/local-strategy.js";
 
 const routes = Router();
 
