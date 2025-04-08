@@ -20,3 +20,16 @@ export async function getUserByEmail(email) {
 export async function getUserByID(id) {
   return await pool.query("SELECT * FROM users WHERE id = $1", [id]);
 }
+
+export async function getAllPost() {
+  return await pool.query(
+    "SELECT first_name, last_name, email, post_text, created_by_id FROM users LEFT JOIN user_post ON users.id = user_post.created_by_id WHERE created_by_id IS NOT NULL"
+  );
+}
+
+export async function getUserPostByEmail(email) {
+  return await pool.query(
+    "SELECT first_name, last_name, email, post_text FROM users LEFT JOIN user_post ON users.id = user_post.created_by_id WHERE email = $1",
+    [email]
+  );
+}

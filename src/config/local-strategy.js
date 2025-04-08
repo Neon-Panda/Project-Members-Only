@@ -4,14 +4,14 @@ import * as db from "../database/query.js";
 import bcrypt from "bcryptjs";
 
 passport.serializeUser((user, done) => {
-  console.log("Inside serialize user");
-  console.log(user);
+  // console.log("Inside serialize user");
+  // console.log(user);
   done(null, user.id);
 });
 
 passport.deserializeUser((userID, done) => {
-  console.log("inside deserialize user");
-  console.log("user ID", userID);
+  // console.log("inside deserialize user");
+  // console.log("user ID", userID);
   try {
     const findUser = db.getUserByID(userID);
     if (!findUser) throw new Error("User not found");

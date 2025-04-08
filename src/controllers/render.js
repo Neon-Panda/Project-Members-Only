@@ -1,5 +1,11 @@
-export function home(request, respose) {
-  respose.render("home");
+import * as db from "../database/query.js";
+
+export async function home(request, respose) {
+  const { rows: allPost } = await db.getAllPost();
+  respose.render("home", {
+    allPost: allPost,
+    member: request.session.passport?.user,
+  });
 }
 
 export function login(request, response) {

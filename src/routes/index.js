@@ -14,4 +14,9 @@ routes.post("/register", auth.register);
 routes.post("/login", passport.authenticate("local"), auth.login);
 routes.post("/logout", auth.logout);
 
+routes.get("/login-status", (request, response) => {
+  console.log(request.session);
+  response.send(200);
+});
+
 export default routes;

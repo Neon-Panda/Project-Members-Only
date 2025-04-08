@@ -6,12 +6,19 @@
     <title>Home</title>
   </head>
   <body>
-    <% if (locals.user) {%>
-    <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/log-out">LOG OUT</a>
-    <% } else { %>
     <h1>Home page</h1>
 
-    <%}%>
+    <% if (locals.member) {%>
+    <p>LOGGED IN TEST EXAMPLE</p>
+    <p>USER ID <%= locals.member %></p>
+    <%} %> <% locals.allPost.map(item => { %>
+    <div>
+      <p>Post: <%= item.post_text %></p>
+      <p>
+        Submited by: <%if (locals.member) {%> <%=item.first_name %> <%=
+        item.last_name%> <%} else {%>Anonymous<%}%>
+      </p>
+    </div>
+    <% }) %>
   </body>
 </html>
