@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import * as db from "../database/query.js";
+import { validationResult } from "express-validator";
 
 export async function register(request, response) {
   try {
