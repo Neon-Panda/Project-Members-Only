@@ -5,15 +5,15 @@ import bcrypt from "bcryptjs";
 
 passport.serializeUser((user, done) => {
   // console.log("Inside serialize user");
-  // console.log(user);
-  done(null, user.id);
+  const userObj = { userID: user.id, member: user.member, admin: user.admin };
+  done(null, userObj);
 });
 
-passport.deserializeUser((userID, done) => {
+passport.deserializeUser((userObj, done) => {
   // console.log("inside deserialize user");
-  // console.log("user ID", userID);
+  // console.log(userObj);
   try {
-    const findUser = db.getUserByID(userID);
+    const findUser = db.getUserByID(userObj.userID);
     if (!findUser) throw new Error("User not found");
     done(null, findUser);
   } catch (error) {

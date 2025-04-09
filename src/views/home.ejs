@@ -7,7 +7,12 @@
   </head>
   <body>
     <h1>Home page</h1>
-    <% locals.allPost.map(item => { %>
+    <% if (locals.member) {%>
+    <form action="/create-post">
+      <label for="newPost">Make new post:</label>
+      <input id="newPost" name="newPost" type="text" />
+    </form>
+    <%} %> <% locals.allPost.map(item => { %>
     <div>
       <p>Post: <%= item.post_text %></p>
       <p>

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import * as db from "../database/query.js";
-import { validationResult } from "express-validator";
+import "dotenv/config";
 
 export async function register(request, response) {
   try {
@@ -9,8 +9,7 @@ export async function register(request, response) {
       request.body.first_name,
       request.body.last_name,
       request.body.email,
-      hashedPassword,
-      "member"
+      hashedPassword
     );
     response.redirect("/");
   } catch (error) {
@@ -30,4 +29,15 @@ export function logout(request, response) {
     if (error) return response.sendStatus(400);
     response.sendStatus(200);
   });
+}
+
+export async function makeMember(request, response) {
+  const secretCode = request.body.memberSecret;
+  const userObj = request.session.passport.user;
+
+  if (secretCode === process.env.secretMember) {
+    await db.makeUserMember(userObj.userID);
+    return response.send(200);
+  }
+  response.send("Could not make you a member");
 }

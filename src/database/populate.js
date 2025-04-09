@@ -9,7 +9,8 @@ CREATE TABLE users (
   last_name VARCHAR(255),
   email VARCHAR(255),
   password VARCHAR(255),
-  status VARCHAR(255)
+  member BOOLEAN DEFAULT false, 
+  admin BOOLEAN DEFAULT false
 );
 
 CREATE TABLE user_post (
@@ -21,11 +22,16 @@ CREATE TABLE user_post (
 );
 
 INSERT INTO 
-users (first_name, last_name, email, password, status)
+users (first_name, last_name, email, password, member, admin)
 VALUES
-('John', 'Smith', 'johnsmith@example.com', '123', 'member'),
-('Will', 'Rivers', 'willrivers@example.com', '123', 'member'),
-('Helena', 'Wells', 'helenawells@example.com', '123', 'admin');
+('John', 'Smith', 'johnsmith@example.com', '123', true, false),
+('Will', 'Rivers', 'willrivers@example.com', '123', true, false),
+('Helena', 'Wells', 'helenawells@example.com', '123', true, true);
+
+INSERT INTO
+users (first_name, last_name, email, password)
+VALUES
+('George', 'Bottle', 'georgebottle@example.com', '123');
 
 INSERT INTO
 user_post (post_text, created_by_id)
